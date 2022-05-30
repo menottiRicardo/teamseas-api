@@ -20,7 +20,9 @@ datasource db {
 model Donation {
   id          Int      @id @default(autoincrement())
   count       Int
+  /// @Validator.MinLength(3)
   displayName String
+  /// @Validator.IsEmail()
   email       String
   mobile      String?
   team        String?

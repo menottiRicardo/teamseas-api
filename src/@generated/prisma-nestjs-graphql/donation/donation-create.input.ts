@@ -1,6 +1,7 @@
 import { Field } from '@nestjs/graphql';
 import { InputType } from '@nestjs/graphql';
 import { Int } from '@nestjs/graphql';
+import * as Validator from 'class-validator';
 
 @InputType()
 export class DonationCreateInput {
@@ -9,9 +10,11 @@ export class DonationCreateInput {
     count!: number;
 
     @Field(() => String, {nullable:false})
+    @Validator.MinLength(3)
     displayName!: string;
 
     @Field(() => String, {nullable:false})
+    @Validator.IsEmail()
     email!: string;
 
     @Field(() => String, {nullable:true})
