@@ -24,4 +24,12 @@ export class DonationsService {
   findOne(donationWhereUniqueInput: Prisma.DonationWhereUniqueInput) {
     return this.prisma.donation.findUnique({ where: donationWhereUniqueInput });
   }
+
+  async getTotal() {
+    const response = await this.prisma.donation.aggregate({
+      _sum: { count: true },
+    });
+
+    return response._sum.count;
+  }
 }
